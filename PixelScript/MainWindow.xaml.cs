@@ -1,6 +1,7 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
@@ -37,7 +38,7 @@ namespace PixelScript {
             int xpos = 0;
             int ypos = 0;
 
-            string[] colorAray = new string[pixels.Length / 4];
+            string[] colorArray = new string[pixels.Length / 4];
             int colorIndex = 0;
             for (int index = 0; index < pixels.Length; index += 4) {
 
@@ -48,16 +49,22 @@ namespace PixelScript {
                 byte alpha = pixels[index + 3];
 
                 int color = red << 16 | green << 8 | blue;
-                colorAray[colorIndex++] = color.ToString("X6");
+                colorArray[colorIndex++] = color.ToString("X6");
             }
 
-            for (int i = 0; i < colorAray.Length; i++) {
+            var outArray = new List<string>();
+
+            for (int i = 0; i < colorArray.Length; i++) {
                 xpos = i % img.PixelWidth;
                 ypos = i / img.PixelWidth;
 
-                colorAray[i] = $@"<panel xpos=""{xpos * 10}"" ypos=""{ypos * 10}"" width=""10"" height=""10"" background=""#{colorAray[i]}""/>";
-                Console.WriteLine(colorAray[i]);
+                var outString = $@"<panel xpos=""{xpos * 10}"" ypos=""{ypos * 10}"" width=""10"" height=""10"" background=""#{colorArray[i]}""/>";
+                outArray.Add(outString);
+                Console.WriteLine(outString);
             }
+
+            var outWindow = new ScriptOut(outArray);
+            outWindow.Show();
         }
 
         private void Exit_OnClick(object sender, RoutedEventArgs e) {

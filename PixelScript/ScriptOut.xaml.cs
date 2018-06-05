@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 
@@ -7,8 +10,9 @@ namespace PixelScript {
     /// Interaction logic for ScriptOut.xaml
     /// </summary>
     public partial class ScriptOut : Window {
-        public ScriptOut() {
+        public ScriptOut(List<string> outList) {
             InitializeComponent();
+            OutText.Text = String.Join("\n", outList);
         }
     }
 }

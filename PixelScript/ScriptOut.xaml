@@ -13,6 +13,6 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         >
     <Grid>
-        <TextBlock Background="Transparent"></TextBlock>
+        <TextBox x:Name="OutText" Background="Transparent"></TextBox>
     </Grid>
 </Window>
